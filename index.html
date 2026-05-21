@@ -29,520 +29,104 @@
     --o-color: #1A6FA0;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text-dark);
-    min-height: 100vh;
-  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text-dark); min-height: 100vh; }
 
-  /* Header */
-  header {
-    background: var(--nsu-blue);
-    color: white;
-    position: relative;
-    overflow: hidden;
-  }
-  header::before {
-    content: '';
-    position: absolute;
-    top: -60px; right: -80px;
-    width: 320px; height: 320px;
-    background: rgba(200,147,27,0.15);
-    border-radius: 50%;
-  }
-  header::after {
-    content: '';
-    position: absolute;
-    bottom: -40px; left: 30%;
-    width: 200px; height: 200px;
-    background: rgba(74,144,217,0.12);
-    border-radius: 50%;
-  }
-.header-inner {
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 36px 32px 32px;
-    position: relative; z-index: 1;
-  }
-  .header-eyebrow {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--nsu-gold);
-    margin-bottom: 10px;
-  }
-  header h1 {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(1.8rem, 5vw, 2.8rem);
-    font-weight: 800;
-    line-height: 1.1;
-  }
+  header { background: var(--nsu-blue); color: white; position: relative; overflow: hidden; }
+  header::before { content: ''; position: absolute; top: -60px; right: -80px; width: 320px; height: 320px; background: rgba(200,147,27,0.15); border-radius: 50%; }
+  header::after { content: ''; position: absolute; bottom: -40px; left: 30%; width: 200px; height: 200px; background: rgba(74,144,217,0.12); border-radius: 50%; }
+  .header-inner { max-width: 100%; margin: 0 auto; padding: 36px 32px 32px; position: relative; z-index: 1; }
+  .header-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--nsu-gold); margin-bottom: 10px; }
+  header h1 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800; line-height: 1.1; }
   header h1 span { color: var(--nsu-gold); }
-  .header-sub {
-    margin-top: 10px;
-    font-size: 15px;
-    font-weight: 300;
-    color: rgba(255,255,255,0.75);
-    max-width: 560px;
-    line-height: 1.6;
-  }
-  .progress-wrap {
-    background: rgba(255,255,255,0.1);
-    height: 4px;
-    margin-top: 24px;
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .progress-bar {
-    height: 100%;
-    background: var(--nsu-gold);
-    border-radius: 2px;
-    transition: width 0.5s cubic-bezier(.4,0,.2,1);
-    width: 0%;
-  }
-  .progress-label {
-    font-size: 11px;
-    color: rgba(255,255,255,0.55);
-    margin-top: 6px;
-    font-weight: 500;
-  }
-  .cardio-nav {
-    display: flex;
-    gap: 8px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-  }
-  .cardio-pill {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Fraunces', serif;
-    font-weight: 800;
-    font-size: 15px;
-    color: rgba(255,255,255,0.4);
-    border: 2px solid rgba(255,255,255,0.18);
-    transition: all 0.3s;
-    position: relative;
-  }
-  .cardio-pill.active {
-    color: #fff;
-    border-color: rgba(255,255,255,0.6);
-    background: rgba(255,255,255,0.12);
-  }
-  .cardio-pill.done {
-    color: var(--nsu-gold);
-    border-color: var(--nsu-gold);
-    background: rgba(200,147,27,0.12);
-  }
-  .cardio-pill.done::after {
-    content: '\2713';
-    position: absolute;
-    font-size: 9px;
-    top: -3px; right: -3px;
-    background: var(--nsu-gold);
-    color: white;
-    width: 14px; height: 14px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 700;
-  }
+  .header-sub { margin-top: 10px; font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.75); max-width: 560px; line-height: 1.6; }
+  .progress-wrap { background: rgba(255,255,255,0.1); height: 4px; margin-top: 24px; border-radius: 2px; overflow: hidden; }
+  .progress-bar { height: 100%; background: var(--nsu-gold); border-radius: 2px; transition: width 0.5s cubic-bezier(.4,0,.2,1); width: 0%; }
+  .progress-label { font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 6px; font-weight: 500; }
+  .cardio-nav { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+  .cardio-pill { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-weight: 800; font-size: 15px; color: rgba(255,255,255,0.4); border: 2px solid rgba(255,255,255,0.18); transition: all 0.3s; position: relative; }
+  .cardio-pill.active { color: #fff; border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.12); }
+  .cardio-pill.done { color: var(--nsu-gold); border-color: var(--nsu-gold); background: rgba(200,147,27,0.12); }
+  .cardio-pill.done::after { content: '\2713'; position: absolute; font-size: 9px; top: -3px; right: -3px; background: var(--nsu-gold); color: white; width: 14px; height: 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Sans', sans-serif; font-weight: 700; }
 
-  /* Main */
-main {
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 36px 32px 80px;
-  }
+  main { max-width: 100%; margin: 0 auto; padding: 36px 32px 80px; }
 
-  /* Intro */
-  #section-intro { display: block; }
-  .intro-card {
-    background: var(--card-bg);
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    margin-bottom: 28px;
-  }
+  #section-intro, #section-intro2 { display: block; }
+  .intro-card { background: var(--card-bg); border-radius: 20px; box-shadow: var(--shadow); overflow: hidden; margin-bottom: 28px; }
   .intro-card-body { padding: 28px 32px; }
-  .intro-card-body h2 {
-    font-family: 'Fraunces', serif;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: var(--nsu-blue);
-    margin-bottom: 12px;
-  }
-  .intro-card-body p {
-    font-size: 15px;
-    line-height: 1.75;
-    color: var(--text-mid);
-    margin-bottom: 14px;
-  }
+  .intro-card-body h2 { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 600; color: var(--nsu-blue); margin-bottom: 12px; }
+  .intro-card-body p { font-size: 15px; line-height: 1.75; color: var(--text-mid); margin-bottom: 14px; }
   .intro-card-body p:last-of-type { margin-bottom: 0; }
 
-  /* Sections */
   .section { display: none; animation: fadeUp 0.45s cubic-bezier(.4,0,.2,1) both; }
   .section.active { display: block; }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* Teach card */
-  .teach-card {
-    background: var(--card-bg);
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    margin-bottom: 28px;
-  }
-  .teach-header {
-    padding: 26px 32px 22px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    border-bottom: 1px solid var(--border);
-  }
-  .letter-badge {
-    width: 64px; height: 64px;
-    border-radius: 16px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Fraunces', serif;
-    font-size: 34px;
-    font-weight: 800;
-    color: white;
-    flex-shrink: 0;
-  }
-  .teach-title-group h2 {
-    font-family: 'Fraunces', serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    line-height: 1.2;
-  }
-  .teach-title-group .stands-for {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-light);
-    margin-top: 3px;
-  }
+  .teach-card { background: var(--card-bg); border-radius: 20px; box-shadow: var(--shadow); overflow: hidden; margin-bottom: 28px; }
+  .teach-header { padding: 26px 32px 22px; display: flex; align-items: center; gap: 20px; border-bottom: 1px solid var(--border); }
+  .letter-badge { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 34px; font-weight: 800; color: white; flex-shrink: 0; }
+  .teach-title-group h2 { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 600; line-height: 1.2; }
+  .teach-title-group .stands-for { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); margin-top: 3px; }
   .teach-body { padding: 26px 32px; }
-  .teach-body p {
-    font-size: 15px;
-    line-height: 1.75;
-    color: var(--text-mid);
-    margin-bottom: 16px;
-  }
+  .teach-body p { font-size: 15px; line-height: 1.75; color: var(--text-mid); margin-bottom: 16px; }
   .teach-body p:last-child { margin-bottom: 0; }
-  .question-checklist {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 16px;
-  }
-  .question-checklist li {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 14px;
-    color: var(--text-mid);
-    line-height: 1.5;
-  }
-  .question-checklist li::before {
-    content: '\2192';
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .tip-box {
-    background: var(--bg);
-    border-radius: 12px;
-    padding: 16px 20px;
-    margin-top: 20px;
-    border-left: 4px solid;
-    font-size: 14px;
-    color: var(--text-mid);
-    line-height: 1.6;
-  }
+  .question-checklist { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+  .question-checklist li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-mid); line-height: 1.5; }
+  .question-checklist li::before { content: '\2192'; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .tip-box { background: var(--bg); border-radius: 12px; padding: 16px 20px; margin-top: 20px; border-left: 4px solid; font-size: 14px; color: var(--text-mid); line-height: 1.6; }
   .tip-box strong { color: var(--text-dark); }
-  .section-image {
-    margin: 24px 0 0;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-  .section-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  .section-image .img-caption {
-    font-size: 12px;
-    color: var(--text-light);
-    padding: 8px 14px;
-    font-style: italic;
-    background: var(--bg);
-    border-top: 1px solid var(--border);
-  }
+  .section-image { margin: 24px 0 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .section-image img { width: 100%; height: auto; display: block; }
+  .section-image .img-caption { font-size: 12px; color: var(--text-light); padding: 8px 14px; font-style: italic; background: var(--bg); border-top: 1px solid var(--border); }
 
-  /* Quiz card */
-  .quiz-card {
-    background: var(--card-bg);
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-  }
-  .quiz-header {
-    padding: 18px 32px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg);
-  }
-  .quiz-label {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--nsu-blue);
-    letter-spacing: 0.04em;
-  }
-  .quiz-sub {
-    font-size: 13px;
-    color: var(--text-light);
-  }
+  .quiz-card { background: var(--card-bg); border-radius: 20px; box-shadow: var(--shadow); overflow: hidden; }
+  .quiz-header { padding: 18px 32px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); background: var(--bg); }
+  .quiz-label { font-size: 13px; font-weight: 700; color: var(--nsu-blue); letter-spacing: 0.04em; }
+  .quiz-sub { font-size: 13px; color: var(--text-light); }
   .quiz-body { padding: 28px 32px; }
-  .question-text {
-    font-family: 'Fraunces', serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    line-height: 1.5;
-    color: var(--text-dark);
-    margin-bottom: 24px;
-  }
-  .options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .option-btn {
-    background: var(--bg);
-    border: 2px solid var(--border);
-    border-radius: 12px;
-    padding: 14px 20px;
-    text-align: left;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--text-mid);
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    line-height: 1.5;
-    width: 100%;
-  }
-  .option-letter {
-    width: 24px; height: 24px;
-    border-radius: 6px;
-    background: white;
-    border: 2px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--text-light);
-    flex-shrink: 0;
-    transition: all 0.2s;
-  }
-  .option-btn:hover:not(:disabled) {
-    border-color: var(--nsu-blue);
-    background: white;
-    transform: translateX(3px);
-    box-shadow: var(--shadow);
-  }
-  .option-btn:hover:not(:disabled) .option-letter {
-    background: var(--nsu-blue);
-    border-color: var(--nsu-blue);
-    color: white;
-  }
-  .option-btn.correct {
-    background: var(--success-light);
-    border-color: var(--success);
-    color: var(--success);
-  }
-  .option-btn.correct .option-letter {
-    background: var(--success);
-    border-color: var(--success);
-    color: white;
-  }
-  .option-btn.wrong {
-    background: var(--error-light);
-    border-color: var(--error);
-    color: var(--error);
-  }
-  .option-btn.wrong .option-letter {
-    background: var(--error);
-    border-color: var(--error);
-    color: white;
-  }
+  .question-text { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 600; line-height: 1.5; color: var(--text-dark); margin-bottom: 24px; }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option-btn { background: var(--bg); border: 2px solid var(--border); border-radius: 12px; padding: 14px 20px; text-align: left; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; color: var(--text-mid); cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; line-height: 1.5; width: 100%; }
+  .option-letter { width: 24px; height: 24px; border-radius: 6px; background: white; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--text-light); flex-shrink: 0; transition: all 0.2s; }
+  .option-btn:hover:not(:disabled) { border-color: var(--nsu-blue); background: white; transform: translateX(3px); box-shadow: var(--shadow); }
+  .option-btn:hover:not(:disabled) .option-letter { background: var(--nsu-blue); border-color: var(--nsu-blue); color: white; }
+  .option-btn.correct { background: var(--success-light); border-color: var(--success); color: var(--success); }
+  .option-btn.correct .option-letter { background: var(--success); border-color: var(--success); color: white; }
+  .option-btn.wrong { background: var(--error-light); border-color: var(--error); color: var(--error); }
+  .option-btn.wrong .option-letter { background: var(--error); border-color: var(--error); color: white; }
   .option-btn:disabled { cursor: not-allowed; opacity: 0.5; }
-  .option-btn.correct:disabled,
-  .option-btn.wrong:disabled { opacity: 1; }
+  .option-btn.correct:disabled, .option-btn.wrong:disabled { opacity: 1; }
 
-  /* Feedback */
-  .feedback {
-    display: none;
-    margin-top: 20px;
-    padding: 16px 20px;
-    border-radius: 12px;
-    font-size: 14px;
-    line-height: 1.6;
-    animation: fadeUp 0.3s ease both;
-  }
+  .feedback { display: none; margin-top: 20px; padding: 16px 20px; border-radius: 12px; font-size: 14px; line-height: 1.6; animation: fadeUp 0.3s ease both; }
   .feedback.show { display: block; }
-  .feedback.correct-fb {
-    background: var(--success-light);
-    border: 1px solid #A8D5BE;
-    color: var(--success);
-  }
-  .feedback.wrong-fb {
-    background: var(--error-light);
-    border: 1px solid #F5B7B1;
-    color: var(--error);
-  }
+  .feedback.correct-fb { background: var(--success-light); border: 1px solid #A8D5BE; color: var(--success); }
+  .feedback.wrong-fb { background: var(--error-light); border: 1px solid #F5B7B1; color: var(--error); }
   .feedback strong { display: block; margin-bottom: 4px; font-size: 15px; }
 
-  /* Nav row */
-  .nav-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 24px;
-    gap: 12px;
-  }
-  .btn-back {
-    background: transparent;
-    border: 2px solid var(--border);
-    color: var(--text-mid);
-    border-radius: 12px;
-    padding: 13px 22px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .btn-back:hover {
-    border-color: var(--nsu-blue);
-    color: var(--nsu-blue);
-    background: white;
-  }
-  .btn-next {
-    display: none;
-    background: var(--nsu-blue);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    padding: 14px 28px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    align-items: center;
-    gap: 8px;
-    margin-left: auto;
-  }
-  .btn-next:hover {
-    background: #002255;
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-hover);
-  }
+  .nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; gap: 12px; }
+  .btn-back { background: transparent; border: 2px solid var(--border); color: var(--text-mid); border-radius: 12px; padding: 13px 22px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+  .btn-back:hover { border-color: var(--nsu-blue); color: var(--nsu-blue); background: white; }
+  .btn-next { display: none; background: var(--nsu-blue); color: white; border: none; border-radius: 12px; padding: 14px 28px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; align-items: center; gap: 8px; margin-left: auto; }
+  .btn-next:hover { background: #002255; transform: translateY(-1px); box-shadow: var(--shadow-hover); }
   .btn-next.show { display: flex; }
+  .btn-start { background: var(--nsu-gold); color: white; border: none; border-radius: 12px; padding: 16px 36px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; letter-spacing: 0.02em; }
+  .btn-start:hover { background: #a87518; transform: translateY(-1px); box-shadow: var(--shadow-hover); }
 
-  /* Start / restart buttons */
-  .btn-start {
-    background: var(--nsu-gold);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    padding: 16px 36px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 0.02em;
-  }
-  .btn-start:hover {
-    background: #a87518;
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-hover);
-  }
-
-  /* Image block in intro */
   .img-block { margin: 20px 0 0; }
   .img-block img { width: 100%; height: auto; border-radius: 10px; display: block; }
-  .img-caption {
-    font-size: 12px;
-    color: var(--text-light);
-    margin-top: 8px;
-    font-style: italic;
-    text-align: center;
-  }
+  .img-caption { font-size: 12px; color: var(--text-light); margin-top: 8px; font-style: italic; text-align: center; }
 
-  /* Completion */
+  .video-wrap { margin: 24px 0 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+  .video-wrap iframe { width: 100%; height: 400px; display: block; border: none; }
+  .video-caption { font-size: 12px; color: var(--text-light); padding: 8px 14px; font-style: italic; background: var(--bg); border-top: 1px solid var(--border); }
+
   #completion { display: none; animation: fadeUp 0.5s ease both; }
   #completion.show { display: block; }
-  .completion-card {
-    background: var(--card-bg);
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    padding: 52px 40px;
-    text-align: center;
-  }
-  .completion-icon-wrap {
-    width: 72px; height: 72px;
-    border-radius: 50%;
-    background: var(--nsu-blue);
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 24px;
-  }
-  #completion h2 {
-    font-family: 'Fraunces', serif;
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--nsu-blue);
-    margin-bottom: 14px;
-  }
-  #completion p {
-    color: var(--text-mid);
-    font-size: 15px;
-    max-width: 520px;
-    margin: 0 auto 28px;
-    line-height: 1.75;
-  }
-  .cardio-recap {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 32px;
-  }
-  .recap-chip {
-    padding: 8px 16px;
-    border-radius: 30px;
-    font-size: 13px;
-    font-weight: 600;
-    color: white;
-  }
+  .completion-card { background: var(--card-bg); border-radius: 20px; box-shadow: var(--shadow); padding: 52px 40px; text-align: center; }
+  .completion-icon-wrap { width: 72px; height: 72px; border-radius: 50%; background: var(--nsu-blue); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+  #completion h2 { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 800; color: var(--nsu-blue); margin-bottom: 14px; }
+  #completion p { color: var(--text-mid); font-size: 15px; max-width: 520px; margin: 0 auto 28px; line-height: 1.75; }
+  .cardio-recap { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+  .recap-chip { padding: 8px 16px; border-radius: 30px; font-size: 13px; font-weight: 600; color: white; }
 
   @media (max-width: 600px) {
     .header-inner, main { padding-left: 18px; padding-right: 18px; }
@@ -552,6 +136,7 @@ main {
     .letter-badge { width: 50px; height: 50px; font-size: 26px; border-radius: 12px; }
     .intro-card-body { padding: 20px; }
     .completion-card { padding: 36px 20px; }
+    .video-wrap iframe { height: 220px; }
   }
 </style>
 </head>
@@ -579,24 +164,16 @@ main {
 
 <main id="mainContent">
 
-  <!-- INTRO -->
+  <!-- INTRO PAGE 1: Information Cycle + Peer Review -->
   <div id="section-intro">
     <div class="intro-card">
       <div class="intro-card-body">
-        <h2>What is CARDIO?</h2>
-        <p>When you are writing a research paper or completing an assignment, not all sources are equally trustworthy. The <strong>CARDIO method</strong> is a tool to help you evaluate whether a source is appropriate and credible to use in your work.</p>
-        <p>Each letter stands for a different criterion to consider when looking at a source. In this tutorial, you will learn what each letter means, see real examples, and answer a question to check your understanding before moving on.</p>
-        <p>The practice source used throughout this tutorial is a blog article titled <em>The Effects of Caffeine Consumption Among College Students.</em></p>
+        <h2>Before You Begin</h2>
         <div class="img-block">
           <img src="The_Information_Cycle_2026.png" alt="The Information Cycle showing how coverage of an event progresses from social media to scholarly journals over time">
           <p class="img-caption">The Information Cycle: how information about an event develops over time, from social media posts to scholarly research.</p>
         </div>
         <p style="margin-top:16px;">When you find a source, it helps to understand <strong>where it falls in the information cycle</strong>. A social media post published right after an event is very different from a peer-reviewed journal article published a year later. Different assignments may call for different types of sources, so knowing how information develops over time will help you make better choices.</p>
-        <div class="img-block" style="margin-top:20px; max-width:75%; margin-left:auto; margin-right:auto;">
-          <img src="CARDIO_Graphic.png" alt="CARDIO infographic showing all six criteria">
-          <p class="img-caption">The CARDIO evaluation framework, use these six questions every time you evaluate a source.</p>
-        </div>
-        <p style="margin-top:16px;">The graphic above summarizes the six CARDIO criteria you will work through in this tutorial. Keep it in mind as a quick reference while you practice evaluating sources.</p>
         <div class="img-block" style="margin-top:20px;">
           <img src="Peer_Reviewd_Graphic_2026.png" alt="Diagram showing the peer review cycle from research to publication">
           <p class="img-caption">The peer review process: how a scholarly article moves from research to publication.</p>
@@ -605,6 +182,32 @@ main {
       </div>
     </div>
     <div style="text-align:right;">
+      <button class="btn-start" onclick="goToIntro2()">Next &rarr;</button>
+    </div>
+  </div>
+
+  <!-- INTRO PAGE 2: What is CARDIO + CARDIO graphic + lateral reading video -->
+  <div id="section-intro2" style="display:none;">
+    <div class="intro-card">
+      <div class="intro-card-body">
+        <h2>What is CARDIO?</h2>
+        <p>When you are writing a research paper or completing an assignment, not all sources are equally trustworthy. The <strong>CARDIO method</strong> is a tool to help you evaluate whether a source is appropriate and credible to use in your work.</p>
+        <p>Each letter stands for a different criterion to consider when looking at a source. In this tutorial, you will learn what each letter means, see real examples, and answer a question to check your understanding before moving on.</p>
+        <p>The practice source used throughout this tutorial is a blog article titled <em>The Effects of Caffeine Consumption Among College Students.</em></p>
+        <div class="img-block" style="margin-top:20px; max-width:75%; margin-left:auto; margin-right:auto;">
+          <img src="CARDIO_Graphic.png" alt="CARDIO infographic showing all six criteria">
+          <p class="img-caption">The CARDIO evaluation framework &mdash; use these six questions every time you evaluate a source.</p>
+        </div>
+        <p style="margin-top:16px;">The graphic above summarizes the six CARDIO criteria you will work through in this tutorial. Keep it in mind as a quick reference while you practice evaluating sources.</p>
+        <p style="margin-top:16px;">One of the most important skills in evaluating sources is <strong>lateral reading</strong> &mdash; instead of reading deeply into a single source to decide if it is trustworthy, you open new browser tabs and search for what others say about the author or organization. Professional fact-checkers use this technique because it is faster and more reliable than trying to evaluate a source on its own. Watch the short video below to see lateral reading in action.</p>
+        <div class="video-wrap" style="margin-top:20px;">
+          <iframe src="https://www.youtube.com/embed/SHNprb2hgzU" title="Lateral Reading video" allowfullscreen></iframe>
+          <div class="video-caption">Lateral reading: how professional fact-checkers evaluate sources by searching for outside information rather than reading the source alone.</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:space-between; margin-top:8px;">
+      <button class="btn-back" onclick="goBackToIntro1()">&#8592; Back</button>
       <button class="btn-start" onclick="startTutorial()">Begin Tutorial &rarr;</button>
     </div>
   </div>
@@ -648,7 +251,6 @@ main {
           <img src="currency.png" alt="Article title, author Alexis Mataban Abadiano, and publication date May 20, 2025">
           <div class="img-caption">Practice source: The article title, author, and publication date, these are the first things to check for currency.</div>
         </div>
-      </div>
         <p class="question-text">How does the publication date of this article affect whether it is a good source for research about caffeine and college students?</p>
         <div class="options" id="opts-0">
           <button class="option-btn" onclick="checkAnswer(0,0,false)"><span class="option-letter">A</span><span>The article is from a medical journal, so it is always considered current regardless of the publication date.</span></button>
@@ -658,7 +260,7 @@ main {
         </div>
         <div class="feedback" id="fb-0"></div>
         <div class="nav-row">
-          <button class="btn-back" onclick="goBack('intro')">&#8592; Back</button>
+          <button class="btn-back" onclick="goBack('intro2')">&#8592; Back</button>
           <button class="btn-next" id="next-0" onclick="nextSection(1)">Next: Authority &#8594;</button>
         </div>
       </div>
@@ -687,7 +289,6 @@ main {
         <div class="tip-box" style="border-color:var(--a-color)">
           <strong>Lateral Reading:</strong> Instead of only reading the source itself, open new browser tabs and search for the author or organization in other sources. This is one of the most effective fact-checking techniques used by professional researchers.
         </div>
-        <div class="section-image">
       </div>
     </div>
     <div class="quiz-card">
@@ -704,7 +305,7 @@ main {
         <div class="options" id="opts-1">
           <button class="option-btn" onclick="checkAnswer(1,0,false)"><span class="option-letter">A</span><span>Since it is about a scientific topic, it must have been written by a scientist, so I can use it freely.</span></button>
           <button class="option-btn" onclick="checkAnswer(1,1,false)"><span class="option-letter">B</span><span>Blog posts are never credible sources, so skip it entirely without reading.</span></button>
-          <button class="option-btn" onclick="checkAnswer(1,2,true)"><span class="option-letter">C</span><span>The article is connected to UC Davis and includes an author's name and sources.</span></button>
+          <button class="option-btn" onclick="checkAnswer(1,2,true)"><span class="option-letter">C</span><span>The article is connected to UC Davis and includes an author&#39;s name and sources.</span></button>
           <button class="option-btn" onclick="checkAnswer(1,3,false)"><span class="option-letter">D</span><span>If the writing style seems professional, authority does not matter.</span></button>
         </div>
         <div class="feedback" id="fb-1"></div>
@@ -923,12 +524,6 @@ main {
   <!-- COMPLETION -->
   <div id="completion">
     <div class="completion-card">
-      <div class="completion-card">
-  <div style="margin-bottom:24px;">
-    <!-- paste the full SVG here -->
-  </div>
-  <div class="completion-icon-wrap">
-  ...
       <div class="completion-icon-wrap">
         <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
           <circle cx="18" cy="18" r="16" stroke="#C8931B" stroke-width="2.5"/>
@@ -970,7 +565,6 @@ main {
     if (answered[sectionIdx]) return;
     const opts = document.querySelectorAll(`#opts-${sectionIdx} .option-btn`);
     const fb = document.getElementById(`fb-${sectionIdx}`);
-
     if (!isCorrect) {
       opts[optIdx].classList.add("wrong");
       opts[optIdx].disabled = true;
@@ -978,7 +572,6 @@ main {
       fb.className = "feedback show wrong-fb";
       return;
     }
-
     answered[sectionIdx] = true;
     opts[optIdx].classList.add("correct");
     opts.forEach(btn => { btn.disabled = true; });
@@ -989,8 +582,20 @@ main {
     updateProgress(sectionIdx + 1);
   }
 
-  function startTutorial() {
+  function goToIntro2() {
     document.getElementById("section-intro").style.display = "none";
+    document.getElementById("section-intro2").style.display = "block";
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  function goBackToIntro1() {
+    document.getElementById("section-intro2").style.display = "none";
+    document.getElementById("section-intro").style.display = "block";
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  function startTutorial() {
+    document.getElementById("section-intro2").style.display = "none";
     document.getElementById("section-0").classList.add("active");
     document.getElementById("pill-0").classList.add("active");
     document.getElementById("progressLabel").textContent = "Step 1 of 6";
@@ -1010,9 +615,13 @@ main {
   function goBack(target) {
     const current = document.querySelector(".section.active");
     if (current) current.classList.remove("active");
-
     if (target === "intro") {
       document.getElementById("section-intro").style.display = "block";
+      document.getElementById("progressLabel").textContent = "Introduction";
+      document.getElementById("progressBar").style.width = "0%";
+      for (let i = 0; i < 6; i++) document.getElementById(`pill-${i}`).classList.remove("active");
+    } else if (target === "intro2") {
+      document.getElementById("section-intro2").style.display = "block";
       document.getElementById("progressLabel").textContent = "Introduction";
       document.getElementById("progressBar").style.width = "0%";
       for (let i = 0; i < 6; i++) document.getElementById(`pill-${i}`).classList.remove("active");
