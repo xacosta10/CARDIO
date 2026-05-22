@@ -527,15 +527,86 @@
     </div>
   </div>
 
-  <!-- COMPLETION -->
+<!-- COMPLETION -->
   <div id="completion">
     <div class="completion-card">
-      <div class="completion-icon-wrap">
-        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-          <circle cx="18" cy="18" r="16" stroke="#C8931B" stroke-width="2.5"/>
-          <path d="M10 18.5l5.5 5.5 10.5-11" stroke="#C8931B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
+      <svg width="100%" viewBox="0 0 680 340" role="img" style="max-width:690px;display:block;margin-inline:auto;">
+        <title>Congratulations, you completed CARDIO!</title>
+        <desc>An animated congratulations graphic with NSU blue and gold. Each CARDIO letter pops in one at a time and a gold circle pulses above the congratulations text.</desc>
+        <style>
+          .pulse1 { animation: pulse 2s ease-in-out infinite; transform-origin: 340px 75px; }
+          .pulse2 { animation: pulse 2s ease-in-out infinite 0.3s; transform-origin: 340px 75px; }
+          .pulse3 { animation: pulse 2s ease-in-out infinite 0.6s; transform-origin: 340px 75px; }
+          @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.18); opacity: 0.6; }
+          }
+          .header-fade { animation: fadeDown 0.6s ease 0.2s both; }
+          @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .c1 { animation: popIn 0.45s cubic-bezier(.34,1.56,.64,1) 0.8s both; }
+          .c2 { animation: popIn 0.45s cubic-bezier(.34,1.56,.64,1) 1.2s both; }
+          .c3 { animation: popIn 0.45s cubic-bezier(.34,1.56,.64,1) 1.6s both; }
+          .c4 { animation: popIn 0.45s cubic-bezier(.34,1.56,.64,1) 2.0s both; }
+          .c5 { animation: popIn 0.45s cubic-bezier(.34,1.56,.64,1) 2.4s both; }
+          .c6 { animation: popIn 0.45s cubic-bezier(.34,1.56,.64,1) 2.8s both; }
+          @keyframes popIn {
+            from { opacity: 0; transform: scale(0.4); }
+            to   { opacity: 1; transform: scale(1); }
+          }
+          .footer-fade { animation: fadeUp 0.6s ease 3.2s both; }
+          @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 0.45; transform: translateY(0); }
+          }
+        </style>
+        <rect x="0" y="0" width="680" height="340" rx="16" fill="#ffffff"/>
+        <rect x="0" y="0" width="680" height="8" fill="#003478"/>
+        <rect x="0" y="332" width="680" height="8" fill="#C8931B"/>
+        <rect x="40" y="38" width="600" height="2" rx="1" fill="#C8931B" opacity="0.35"/>
+        <rect x="40" y="300" width="600" height="2" rx="1" fill="#003478" opacity="0.2"/>
+        <circle class="pulse1" cx="340" cy="75" r="32" fill="#FDF3E0"/>
+        <circle class="pulse2" cx="340" cy="75" r="22" fill="#F5E0B0"/>
+        <circle class="pulse3" cx="340" cy="75" r="12" fill="#C8931B" opacity="0.7"/>
+        <g class="header-fade">
+          <text x="340" y="128" text-anchor="middle" font-family="Georgia, serif" font-size="26" font-weight="700" fill="#003478" letter-spacing="0.5">Congratulations!</text>
+          <text x="340" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="12.5" fill="#555">You have completed the CARDIO source evaluation tutorial.</text>
+          <line x1="160" y1="170" x2="520" y2="170" stroke="#C8931B" stroke-width="1" opacity="0.4"/>
+        </g>
+        <g class="c1" style="transform-origin:90px 225px;">
+          <circle cx="90" cy="225" r="36" fill="#003478"/>
+          <text x="90" y="235" text-anchor="middle" font-family="Georgia, serif" font-size="30" font-weight="800" fill="#ffffff">C</text>
+          <text x="90" y="279" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#003478" font-weight="600">Currency</text>
+        </g>
+        <g class="c2" style="transform-origin:190px 225px;">
+          <circle cx="190" cy="225" r="36" fill="#C8931B"/>
+          <text x="190" y="235" text-anchor="middle" font-family="Georgia, serif" font-size="30" font-weight="800" fill="#ffffff">A</text>
+          <text x="190" y="279" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#C8931B" font-weight="600">Authority</text>
+        </g>
+        <g class="c3" style="transform-origin:290px 225px;">
+          <circle cx="290" cy="225" r="36" fill="#003478"/>
+          <text x="290" y="235" text-anchor="middle" font-family="Georgia, serif" font-size="30" font-weight="800" fill="#ffffff">R</text>
+          <text x="290" y="279" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#003478" font-weight="600">Relevance</text>
+        </g>
+        <g class="c4" style="transform-origin:390px 225px;">
+          <circle cx="390" cy="225" r="36" fill="#C8931B"/>
+          <text x="390" y="235" text-anchor="middle" font-family="Georgia, serif" font-size="30" font-weight="800" fill="#ffffff">D</text>
+          <text x="390" y="279" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#C8931B" font-weight="600">Documentation</text>
+        </g>
+        <g class="c5" style="transform-origin:490px 225px;">
+          <circle cx="490" cy="225" r="36" fill="#003478"/>
+          <text x="490" y="235" text-anchor="middle" font-family="Georgia, serif" font-size="30" font-weight="800" fill="#ffffff">I</text>
+          <text x="490" y="279" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#003478" font-weight="600">Info Type</text>
+        </g>
+        <g class="c6" style="transform-origin:590px 225px;">
+          <circle cx="590" cy="225" r="36" fill="#C8931B"/>
+          <text x="590" y="235" text-anchor="middle" font-family="Georgia, serif" font-size="30" font-weight="800" fill="#ffffff">O</text>
+          <text x="590" y="279" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#C8931B" font-weight="600">Objectivity</text>
+        </g>
+        <text class="footer-fade" x="340" y="312" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#003478" letter-spacing="2">NSU ALVIN SHERMAN LIBRARY</text>
+      </svg>
       <h2>Well done, you completed CARDIO!</h2>
       <p>You have worked through all six criteria of the CARDIO evaluation method. Use these questions every time you find a source for an assignment to determine whether it is credible, appropriate, and useful for your research.</p>
       <div class="cardio-recap">
