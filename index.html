@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CARDIO Source Evaluation Tutorial | NSU Alvin Sherman Library</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nsu-blue: #003478;
+    --nsu-gold: #C8931B;
+    --bg: #F0EDE8;
+    --card-bg: #FFFFFF;
+    --text-dark: #1A1A2E;
+    --text-mid: #2D2D2D;
+    --text-light: #555555;
+    --success: #2E7D52;
+    --success-light: #E8F5EE;
+    --error: #C0392B;
+    --error-light: #FDECEA;
+    --border: #CCCCCC;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    --shadow-hover: 0 6px 24px rgba(0,52,120,0.15);
+    --c-color: #003478;
+    --a-color: #C8931B;
+    --r-color: #2E7D52;
+    --d-color: #7B3FA0;
+    --i-color: #C0392B;
+    --o-color: #1A6FA0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Montserrat', Arial, sans-serif; background: var(--bg); color: var(--text-dark); min-height: 100vh; }
+
+  /* HEADER */
+  header { background: var(--nsu-blue); color: white; position: relative; overflow: hidden; }
+  header::before { content: ''; position: absolute; top: -60px; right: -80px; width: 320px; height: 320px; background: rgba(200,147,27,0.15); border-radius: 50%; }
+  header::after { content: ''; position: absolute; bottom: -40px; left: 30%; width: 200px; height: 200px; background: rgba(74,144,217,0.12); border-radius: 50%; }
+  .header-inner { max-width: 100%; margin: 0 auto; padding: 36px 32px 32px; position: relative; z-index: 1; }
+  .header-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--nsu-gold); margin-bottom: 10px; }
+  header h1 { font-family: 'Montserrat', Arial, sans-serif; font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800; line-height: 1.1; }
+  header h1 span { color: var(--nsu-gold); }
+  .header-sub { margin-top: 10px; font-size: 15px; font-weight: 400; color: rgba(255,255,255,0.85); max-width: 560px; line-height: 1.6; }
+  .progress-wrap { background: rgba(255,255,255,0.1); height: 4px; margin-top: 24px; border-radius: 2px; overflow: hidden; }
+  .progress-bar { height: 100%; background: var(--nsu-gold); border-radius: 2px; transition: width 0.5s cubic-bezier(.4,0,.2,1); width: 0%; }
+  .progress-label { font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 6px; font-weight: 600; }
+  .cardio-nav { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+  .cardio-pill { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', Arial, sans-serif; font-weight: 800; font-size: 15px; color: rgba(255,255,255,0.4); border: 2px solid rgba(255,255,255,0.18); transition: all 0.3s; position: relative; }
+  .cardio-pill.active { color: #fff; border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.12); }
+  .cardio-pill.done { color: var(--nsu-gold); border-color: var(--nsu-gold); background: rgba(200,147,27,0.12); }
+  .cardio-pill.done::after { content: '\2713'; position: absolute; font-size: 9px; top: -3px; right: -3px; background: var(--nsu-gold); color: white; width: 14px; height: 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+
+  /* MAIN */
+  main { max-width: 100%; margin: 0 auto; padding: 28px 32px 80px; }
+
+  /* INTRO */
+  #section-intro, #section-intro2 { display: block; }
+  .intro-card { background: var(--card-bg); border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; margin-bottom: 24px; border: 1px solid var(--border); }
+  .intro-card-body { padding: 32px 36px; }
+  .intro-card-body h2 { font-family: 'Montserrat', Arial, sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--nsu-blue); margin-bottom: 16px; }
+  .intro-card-body p { font-size: 17px; line-height: 1.85; color: var(--text-mid); margin-bottom: 20px; }
+  .intro-card-body p:last-of-type { margin-bottom: 0; }
+  .img-block { margin: 24px 0 0; }
+  .img-block img { width: 100%; height: auto; border-radius: 10px; display: block; border: 1px solid var(--border); }
+  .img-caption { font-size: 13px; color: var(--text-light); margin-top: 8px; font-style: italic; text-align: center; font-weight: 500; }
+  .section-divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+  .video-wrap { margin: 24px auto 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); max-width: 560px; }
+  .video-wrap iframe { width: 560px; height: 315px; display: block; border: none; }
+  .video-caption { font-size: 13px; color: var(--text-light); padding: 10px 16px; font-style: italic; background: #F8F8F8; border-top: 1px solid var(--border); font-weight: 500; }
+
+  /* SECTIONS */
+  .section { display: none; animation: fadeUp 0.4s cubic-bezier(.4,0,.2,1) both; }
+  .section.active { display: block; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* INSTRUCTIONS BAR */
+  .instructions-bar { font-family: 'Montserrat', Arial, sans-serif; font-weight: 700; font-size: 14px; color: #1A1A2E; background: #FFF8E8; border: 1px solid #E8C97A; border-radius: 10px; padding: 12px 18px; margin-bottom: 16px; line-height: 1.6; }
+  .instructions-bar a { color: var(--nsu-blue); text-decoration: underline; font-weight: 700; }
+  .instructions-bar a:hover { color: var(--nsu-gold); }
+
+  /* TEACH CARD */
+  .teach-card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; margin-bottom: 16px; }
+  .teach-header { padding: 20px 24px; display: flex; align-items: center; gap: 16px; background: var(--card-bg); }
+  .letter-badge { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', Arial, sans-serif; font-size: 26px; font-weight: 800; color: white; flex-shrink: 0; }
+  .teach-title-group h2 { font-family: 'Montserrat', Arial, sans-serif; font-size: 1.3rem; font-weight: 700; line-height: 1.2; }
+  .teach-title-group .stands-for { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-light); margin-top: 3px; }
+  .teach-body { padding: 0 24px 24px; background: var(--card-bg); }
+
+  /* ARTICLE IMAGE IN TEACH */
+  .article-image-wrap { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 20px; }
+  .article-image-wrap img { width: 100%; height: auto; display: block; }
+  .article-image-wrap .img-caption { font-size: 12px; color: var(--text-light); padding: 8px 14px; font-style: italic; background: #F8F8F8; border-top: 1px solid var(--border); font-weight: 500; text-align: center; }
+
+  /* CHECKLIST WITH INPUTS */
+  .ask-yourself { font-size: 16px; font-weight: 600; color: var(--text-mid); margin-bottom: 16px; }
+  .checklist-item { margin-bottom: 18px; }
+  .checklist-question { display: flex; align-items: flex-start; gap: 10px; font-size: 16px; color: #2D2D2D; line-height: 1.5; font-weight: 500; margin-bottom: 10px; }
+  .checklist-question::before { content: '\2192'; font-weight: 700; flex-shrink: 0; margin-top: 2px; color: var(--nsu-blue); }
+  .radio-group { display: flex; gap: 28px; padding-left: 24px; }
+  .radio-group label { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: #2D2D2D; cursor: pointer; }
+  .radio-group input[type="radio"] { width: 18px; height: 18px; accent-color: var(--nsu-blue); cursor: pointer; }
+  .text-input { display: block; width: 100%; max-width: 300px; padding: 10px 14px; border: 2px solid var(--border); border-radius: 8px; font-family: 'Montserrat', Arial, sans-serif; font-size: 15px; color: #1A1A2E; background: white; margin-left: 24px; margin-top: 4px; transition: border-color 0.2s; }
+  .text-input:focus { outline: none; border-color: var(--nsu-blue); }
+  .char-hint { font-size: 11px; color: var(--text-light); margin-top: 4px; margin-left: 24px; font-weight: 500; }
+  .field-error { font-size: 12px; color: var(--error); margin-top: 4px; margin-left: 24px; font-weight: 600; display: none; }
+  .field-error.show { display: block; }
+
+  /* TIP BOX */
+  .tip-box { background: #F0F4FA; border-radius: 10px; padding: 16px 20px; margin-top: 20px; border-left: 5px solid; font-size: 15px; color: #2D2D2D; line-height: 1.7; font-weight: 400; }
+  .tip-box strong { color: #1A1A2E; font-weight: 700; }
+
+  /* SECTION IMAGE (for objectivity/info type graphic) */
+  .section-image { margin: 20px 0 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .section-image img { width: 100%; height: auto; display: block; }
+  .section-image .img-caption { font-size: 12px; color: var(--text-light); padding: 8px 14px; font-style: italic; background: #F8F8F8; border-top: 1px solid var(--border); font-weight: 500; text-align: center; }
+
+  /* QUIZ CARD */
+  .quiz-card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; }
+  .quiz-header { padding: 14px 24px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); background: var(--card-bg); }
+  .quiz-label { font-size: 14px; font-weight: 700; color: var(--nsu-blue); letter-spacing: 0.02em; }
+  .quiz-sub { font-size: 13px; color: var(--text-light); font-weight: 600; }
+  .quiz-body { padding: 24px; background: var(--card-bg); }
+  .question-text { font-family: 'Montserrat', Arial, sans-serif; font-size: 1.2rem; font-weight: 700; line-height: 1.5; color: #1A1A2E; margin-bottom: 20px; }
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .option-btn { background: #F8F8F8; border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; text-align: left; font-family: 'Montserrat', Arial, sans-serif; font-size: 14px; font-weight: 500; color: #2D2D2D; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; line-height: 1.5; width: 100%; }
+  .option-letter { width: 26px; height: 26px; border-radius: 5px; background: white; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--text-light); flex-shrink: 0; transition: all 0.2s; }
+  .option-btn:hover:not(:disabled) { border-color: var(--nsu-blue); background: white; }
+  .option-btn:hover:not(:disabled) .option-letter { background: var(--nsu-blue); border-color: var(--nsu-blue); color: white; }
+  .option-btn.correct { background: var(--success-light); border-color: var(--success); color: var(--success); }
+  .option-btn.correct .option-letter { background: var(--success); border-color: var(--success); color: white; }
+  .option-btn.wrong { background: var(--error-light); border-color: var(--error); color: var(--error); }
+  .option-btn.wrong .option-letter { background: var(--error); border-color: var(--error); color: white; }
+  .option-btn:disabled { cursor: not-allowed; opacity: 0.55; }
+  .option-btn.correct:disabled, .option-btn.wrong:disabled { opacity: 1; }
+
+  .feedback { display: none; margin-top: 16px; padding: 16px 20px; border-radius: 10px; font-size: 15px; line-height: 1.7; font-weight: 500; }
+  .feedback.show { display: block; }
+  .feedback.correct-fb { background: var(--success-light); border: 1px solid #A8D5BE; color: var(--success); }
+  .feedback.wrong-fb { background: var(--error-light); border: 1px solid #F5B7B1; color: var(--error); }
+  .feedback strong { display: block; margin-bottom: 4px; font-size: 16px; font-weight: 700; }
+
+  .validation-msg { display: none; margin-top: 12px; padding: 12px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; color: var(--error); background: var(--error-light); border: 1px solid #F5B7B1; }
+  .validation-msg.show { display: block; }
+
+  .nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; gap: 12px; }
+  .btn-back { background: transparent; border: 2px solid var(--border); color: #2D2D2D; border-radius: 10px; padding: 12px 20px; font-family: 'Montserrat', Arial, sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+  .btn-back:hover { border-color: var(--nsu-blue); color: var(--nsu-blue); background: white; }
+  .btn-next { display: none; background: var(--nsu-blue); color: white; border: none; border-radius: 10px; padding: 13px 26px; font-family: 'Montserrat', Arial, sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; align-items: center; gap: 8px; margin-left: auto; }
+  .btn-next:hover { background: #002255; }
+  .btn-next.show { display: flex; }
+  .btn-start { background: var(--nsu-gold); color: white; border: none; border-radius: 10px; padding: 14px 32px; font-family: 'Montserrat', Arial, sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+  .btn-start:hover { background: #a87518; }
+
+  /* COMPLETION */
+  #completion { display: none; animation: fadeUp 0.5s ease both; }
+  #completion.show { display: block; }
+  .completion-card { background: var(--card-bg); border-radius: 16px; box-shadow: var(--shadow); padding: 52px 40px; text-align: center; border: 1px solid var(--border); }
+  #completion h2 { font-family: 'Montserrat', Arial, sans-serif; font-size: 2rem; font-weight: 800; color: var(--nsu-blue); margin-bottom: 14px; }
+  #completion p { color: #2D2D2D; font-size: 16px; max-width: 520px; margin: 0 auto 28px; line-height: 1.85; font-weight: 400; }
+  .cardio-recap { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+  .recap-chip { padding: 8px 16px; border-radius: 30px; font-size: 13px; font-weight: 700; color: white; }
+
+  @media (max-width: 600px) {
+    .header-inner, main { padding-left: 16px; padding-right: 16px; }
+    .teach-body, .quiz-body { padding: 16px; }
+    .letter-badge { width: 44px; height: 44px; font-size: 22px; }
+    .completion-card { padding: 32px 16px; }
+    .video-wrap iframe { width: 100%; height: 220px; }
+    .video-wrap { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-eyebrow">NSU Alvin Sherman Library &middot; COMP 1500</div>
+    <h1>Evaluate Sources with <span>CARDIO</span></h1>
+    <p class="header-sub">Work through each letter of CARDIO at your own pace. Read the lesson, then answer the question to move forward.</p>
+    <div class="cardio-nav" id="cardioNav">
+      <div class="cardio-pill" id="pill-0">C</div>
+      <div class="cardio-pill" id="pill-1">A</div>
+      <div class="cardio-pill" id="pill-2">R</div>
+      <div class="cardio-pill" id="pill-3">D</div>
+      <div class="cardio-pill" id="pill-4">I</div>
+      <div class="cardio-pill" id="pill-5">O</div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="progress-label" id="progressLabel">Introduction</div>
+  </div>
+</header>
+
+<main id="mainContent">
+
+  <!-- INTRO PAGE 1 -->
+  <div id="section-intro">
+    <div class="intro-card">
+      <div class="intro-card-body">
+        <h2>The Information Cycle</h2>
+        <p>When you find a source, it helps to understand <strong>where it falls in the information cycle</strong>. A social media post published right after an event is very different from a peer-reviewed journal article published a year later. Different assignments may call for different types of sources, so knowing how information develops over time will help you make better choices.</p>
+        <div class="img-block">
+          <img src="The_Information_Cycle_2026.png" alt="The Information Cycle">
+          <p class="img-caption">The Information Cycle: how information about an event develops over time, from social media posts to scholarly research.</p>
+        </div>
+        <hr class="section-divider">
+        <p>You will encounter the term <strong>peer-reviewed</strong> throughout this tutorial. Peer-reviewed sources are scholarly articles that have been evaluated by other experts in the field before being published. They are generally considered among the most credible types of sources for academic research. The diagram below shows how that process works.</p>
+        <div class="img-block" style="margin-top:16px;">
+          <img src="Peer_Reviewd_Graphic_2026.png" alt="The peer review process">
+          <p class="img-caption">The peer review process: how a scholarly article moves from research to publication.</p>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:right;">
+      <button class="btn-start" onclick="goToIntro2()">Next &rarr;</button>
+    </div>
+  </div>
+
+  <!-- INTRO PAGE 2 -->
+  <div id="section-intro2" style="display:none;">
+    <div class="intro-card">
+      <div class="intro-card-body">
+        <h2>What is CARDIO?</h2>
+        <p>When you are writing a research paper or completing an assignment, not all sources are equally trustworthy. The <strong>CARDIO method</strong> is a tool to help you evaluate whether a source is appropriate and credible to use in your work.</p>
+        <p>Each letter stands for a different criterion to consider when looking at a source. In this tutorial, you will learn what each letter means, see real examples, and answer a question to check your understanding before moving on.</p>
+        <p>The practice source used throughout this tutorial is a blog article titled <em>The Effects of Caffeine Consumption Among College Students.</em></p>
+        <div class="img-block" style="max-width:75%; margin-left:auto; margin-right:auto; margin-top:16px;">
+          <img src="CARDIO_Graphic.png" alt="CARDIO infographic showing all six criteria">
+          <p class="img-caption">The CARDIO evaluation framework. Use these six questions every time you evaluate a source.</p>
+        </div>
+        <hr class="section-divider">
+        <p>One of the most important skills in evaluating sources is <strong>lateral reading</strong>. Instead of reading deeply into a single source to decide if it is trustworthy, you open new browser tabs and search for what others say about the author or organization. Professional fact-checkers use this technique because it is faster and more reliable than trying to evaluate a source on its own. Watch the short video below to see lateral reading in action.</p>
+        <div class="video-wrap" style="margin-top:16px;">
+          <iframe src="https://www.youtube.com/embed/SHNprb2hgzU" title="Lateral Reading video" allowfullscreen></iframe>
+          <div class="video-caption">Lateral reading: how professional fact-checkers evaluate sources by searching for outside information rather than reading the source alone.</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:space-between; margin-top:8px;">
+      <button class="btn-back" onclick="goBackToIntro1()">&#8592; Back</button>
+      <button class="btn-start" onclick="startTutorial()">Begin Tutorial &rarr;</button>
+    </div>
+  </div>
+
+  <!-- C: CURRENCY -->
+  <div class="section" id="section-0">
+    <div class="instructions-bar">Instructions: Review the article images below and apply the CARDIO method to answer each question. Practice source: <a href="https://biginnovationgroup.ucdavis.edu/blog/effects-caffeine-consumption-college-students" target="_blank">The Effects of Caffeine Consumption Among College Students | BioInnovation Group at UC Davis</a></div>
+    <div class="teach-card">
+      <div class="teach-header">
+        <div class="letter-badge" style="background:var(--c-color)">C</div>
+        <div class="teach-title-group">
+          <h2 style="color:var(--c-color)">Currency</h2>
+          <div class="stands-for">Is the information up to date?</div>
+        </div>
+      </div>
+      <div class="teach-body">
+        <div class="article-image-wrap">
+          <img src="currency.png" alt="Article title, author Alexis Mataban Abadiano, and publication date May 20, 2025">
+          <div class="img-caption">Practice source: The article title, author, and publication date. These are the first things to check for currency.</div>
+        </div>
+        <p class="ask-yourself" style="margin-top:20px;">When checking currency, ask yourself:</p>
+        <div class="checklist-item">
+          <div class="checklist-question">Is the information up to date?</div>
+          <div class="radio-group">
+            <label><input type="radio" name="c_q1" value="yes" required> Yes</label>
+            <label><input type="radio" name="c_q1" value="no"> No</label>
+          </div>
+          <div class="field-error" id="err-c_q1">Please select Yes or No.</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-question">How important is currency to your topic?</div>
+          <input type="text" class="text-input" id="c_q2" maxlength="25" placeholder="Your answer (max 25 chars)">
+          <div class="char-hint">Maximum 25 characters</div>
+          <div class="field-error" id="err-c_q2">Please enter an answer.</div>
+        </div>
+        <div class="tip-box" style="border-color:var(--c-color); margin-top:20px;">
+          <strong>Important:</strong> Currency matters relative to your topic. A source about the history of the Civil War from 1995 may still be valid, but a source about current medical treatments could be critically outdated within just a few years.
+        </div>
+      </div>
+    </div>
+    <div class="quiz-card">
+      <div class="quiz-header">
+        <span class="quiz-label">Knowledge Check</span>
+        <span class="quiz-sub">&nbsp; C: Currency</span>
+      </div>
+      <div class="quiz-body">
+        <div class="article-image-wrap" style="margin-bottom:20px;">
+          <img src="currency.png" alt="Article title, author Alexis Mataban Abadiano, and publication date May 20, 2025">
+          <div class="img-caption">Practice source: The article title, author, and publication date. These are the first things to check for currency.</div>
+        </div>
+        <p class="question-text">How does the publication date of this article affect whether it is a good source for research about caffeine and college students?</p>
+        <div class="options" id="opts-0">
+          <button class="option-btn" onclick="checkAnswer(0,0,false)"><span class="option-letter">A</span><span>The article is from a medical journal, so it is always considered current regardless of the publication date.</span></button>
+          <button class="option-btn" onclick="checkAnswer(0,1,true)"><span class="option-letter">B</span><span>The article was published recently, so the information is more likely to be current and useful for this topic.</span></button>
+          <button class="option-btn" onclick="checkAnswer(0,2,false)"><span class="option-letter">C</span><span>Currency only matters for technology topics, not medical ones.</span></button>
+          <button class="option-btn" onclick="checkAnswer(0,3,false)"><span class="option-letter">D</span><span>The publication date does not matter for health-related topics.</span></button>
+        </div>
+        <div class="feedback" id="fb-0"></div>
+        <div class="validation-msg" id="val-0">Please complete all questions in the lesson above before moving on.</div>
+        <div class="nav-row">
+          <button class="btn-back" onclick="goBack('intro2')">&#8592; Back</button>
+          <button class="btn-next" id="next-0" onclick="tryNext(0, 1)">Next: Authority &#8594;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- A: AUTHORITY -->
+  <div class="section" id="section-1">
+    <div class="instructions-bar">Instructions: Review the article images below and apply the CARDIO method to answer each question. Practice source: <a href="https://biginnovationgroup.ucdavis.edu/blog/effects-caffeine-consumption-college-students" target="_blank">The Effects of Caffeine Consumption Among College Students | BioInnovation Group at UC Davis</a></div>
+    <div class="teach-card">
+      <div class="teach-header">
+        <div class="letter-badge" style="background:var(--a-color)">A</div>
+        <div class="teach-title-group">
+          <h2 style="color:var(--a-color)">Authority</h2>
+          <div class="stands-for">Who created this information, and are they qualified?</div>
+        </div>
+      </div>
+      <div class="teach-body">
+        <div class="article-image-wrap">
+          <img src="authority.png" alt="Article header showing author name and the BioInnovation Group at UC Davis website">
+          <div class="img-caption">Practice source: The article lists an author published on the UC Davis BioInnovation Group website. Use lateral reading to learn more about the author and organization.</div>
+        </div>
+        <p class="ask-yourself" style="margin-top:20px;">When checking authority, ask yourself:</p>
+        <div class="checklist-item">
+          <div class="checklist-question">Is the author qualified to speak knowledgeably about your topic?</div>
+          <div class="radio-group">
+            <label><input type="radio" name="a_q1" value="yes"> Yes</label>
+            <label><input type="radio" name="a_q1" value="no"> No</label>
+          </div>
+          <div class="field-error" id="err-a_q1">Please select Yes or No.</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-question">What are their credentials?</div>
+          <input type="text" class="text-input" id="a_q2" maxlength="25" placeholder="Your answer (max 25 chars)">
+          <div class="char-hint">Maximum 25 characters</div>
+          <div class="field-error" id="err-a_q2">Please enter an answer.</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-question">What can you learn about the author by reading laterally?</div>
+          <input type="text" class="text-input" id="a_q3" maxlength="25" placeholder="Your answer (max 25 chars)">
+          <div class="char-hint">Maximum 25 characters</div>
+          <div class="field-error" id="err-a_q3">Please enter an answer.</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-question">Does the source tell you if they are affiliated with a reputable institution or organization?</div>
+          <div class="radio-group">
+            <label><input type="radio" name="a_q4" value="yes"> Yes</label>
+            <label><input type="radio" name="a_q4" value="no"> No</label>
+          </div>
+          <div class="field-error" id="err-a_q4">Please select Yes or No.</div>
+        </div>
+        <div class="tip-box" style="border-color:var(--a-color); margin-top:20px;">
+          <strong>Lateral Reading:</strong> Instead of only reading the source itself, open new browser tabs and search for the author or organization in other sources. This is one of the most effective fact-checking techniques used by professional researchers.
+        </div>
+      </div>
+    </div>
+    <div class="quiz-card">
+      <div class="quiz-header">
+        <span class="quiz-label">Knowledge Check</span>
+        <span class="quiz-sub">&nbsp; A: Authority</span>
+      </div>
+      <div class="quiz-body">
+        <div class="article-image-wrap" style="margin-bottom:20px;">
+          <img src="authority.png" alt="Article header showing author name and the BioInnovation Group at UC Davis website">
+          <div class="img-caption">Practice source: The article lists an author published on the UC Davis BioInnovation Group website. Use lateral reading to learn more about the author and organization.</div>
+        </div>
+        <p class="question-text">What information on this webpage helps you decide whether the author or organization is trustworthy?</p>
+        <div class="options" id="opts-1">
+          <button class="option-btn" onclick="checkAnswer(1,0,false)"><span class="option-letter">A</span><span>Since it is about a scientific topic, it must have been written by a scientist, so I can use it freely.</span></button>
+          <button class="option-btn" onclick="checkAnswer(1,1,false)"><span class="option-letter">B</span><span>Blog posts are never credible sources, so skip it entirely without reading.</span></button>
+          <button class="option-btn" onclick="checkAnswer(1,2,true)"><span class="option-letter">C</span><span>The article is connected to UC Davis and includes an author&#39;s name and sources.</span></button>
+          <button class="option-btn" onclick="checkAnswer(1,3,false)"><span class="option-letter">D</span><span>If the writing style seems professional, authority does not matter.</span></button>
+        </div>
+        <div class="feedback" id="fb-1"></div>
+        <div class="validation-msg" id="val-1">Please complete all questions in the lesson above before moving on.</div>
+        <div class="nav-row">
+          <button class="btn-back" onclick="goBack(0)">&#8592; Back</button>
+          <button class="btn-next" id="next-1" onclick="tryNext(1, 2)">Next: Relevance &#8594;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- R: RELEVANCE -->
+  <div class="section" id="section-2">
+    <div class="instructions-bar">Instructions: Review the article images below and apply the CARDIO method to answer each question. Practice source: <a href="https://biginnovationgroup.ucdavis.edu/blog/effects-caffeine-consumption-college-students" target="_blank">The Effects of Caffeine Consumption Among College Students | BioInnovation Group at UC Davis</a></div>
+    <div class="teach-card">
+      <div class="teach-header">
+        <div class="letter-badge" style="background:var(--r-color)">R</div>
+        <div class="teach-title-group">
+          <h2 style="color:var(--r-color)">Relevance</h2>
+          <div class="stands-for">Does this source actually help answer your research question?</div>
+        </div>
+      </div>
+      <div class="teach-body">
+        <div class="article-image-wrap">
+          <img src="relevance.png" alt="Paragraph from the caffeine article discussing FDA guidelines and health risks of overconsumption">
+          <div class="img-caption">Practice source: This paragraph discusses health risks of caffeine overconsumption among students. Consider whether this information directly supports your research question.</div>
+        </div>
+        <p class="ask-yourself" style="margin-top:20px;">When checking relevance, ask yourself:</p>
+        <div class="checklist-item">
+          <div class="checklist-question">Does the source help answer your research question?</div>
+          <div class="radio-group">
+            <label><input type="radio" name="r_q1" value="yes"> Yes</label>
+            <label><input type="radio" name="r_q1" value="no"> No</label>
+          </div>
+          <div class="field-error" id="err-r_q1">Please select Yes or No.</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-question">Is the information too advanced to understand or too simple for your assignment?</div>
+          <div class="radio-group">
+            <label><input type="radio" name="r_q2" value="yes"> Yes</label>
+            <label><input type="radio" name="r_q2" value="no"> No</label>
+          </div>
+          <div class="field-error" id="err-r_q2">Please select Yes or No.</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-question">What information in this source directly relates to or supports your topic?</div>
+          <input type="text" class="text-input" id="r_q3" maxlength="25" placeholder="Your answer (max 25 chars)">
+          <div class="char-hint">Maximum 25 characters</div>
+          <div class="field-error" id="err-r_q3">Please enter an answer.</div>
+        </div>
+        <div class="tip-box" style="border-color:var(--r-color); margin-top:20px;">
+          <strong>Assignment Check:</strong> Always re-read your assignment prompt before evaluating relevance. A source might be related to your broad topic but still not directly answer your specific research question.
+        </div>
+      </div>
+    </div>
+    <div class="quiz-card">
+      <div class="quiz-header">
+        <span class="quiz-label">Knowledge Check</span>
+        <span class="quiz-sub">&nbsp; R: Relevance</span>
+      </div>
+      <div class="quiz-body">
+        <div class="article-image-wrap" style="margin-bottom:20px;">
+          <img src="relevance.png" alt="Paragraph from the caffeine article">
+          <div class="img-caption">Practice source: This paragraph discusses health risks of caffeine overconsumption among students.</div>
+        </div>
+        <p class="question-text">How does this article connect to the topic of college student health or daily life?</p>
+        <div class="options" id="opts-2">
+          <button class="option-btn" onclick="checkAnswer(2,0,false)"><span class="option-letter">A</span><span>It explains how to grow coffee beans on college campuses.</span></button>
+          <button class="option-btn" onclick="checkAnswer(2,1,false)"><span class="option-letter">B</span><span>The article is peer-reviewed and recent, so it should be used regardless of whether it directly addresses your topic.</span></button>
+          <button class="option-btn" onclick="checkAnswer(2,2,false)"><span class="option-letter">C</span><span>Any health-related article is relevant when writing about caffeine.</span></button>
+          <button class="option-btn" onclick="checkAnswer(2,3,true)"><span class="option-letter">D</span><span>It discusses caffeine habits and how they may affect college students.</span></button>
+        </div>
+        <div class="feedback" id="fb-2"></div>
+        <div class="validation-msg" id="val-2">Please complete all questions in the lesson above before moving on.</div>
+        <div class="nav-row">
+          <button class="btn-back" onclick="goBack(1)">&#8592; Back</button>
+          <button class="btn-next" id="next-2" onclick="tryNext(2, 3)">Next: Documentation &#8594;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D: DOCUMENTATION -->
+  <div class="section" id="section-3">
+    <div class="instructions-bar">Instructions: Review the article images below and apply the CARDIO method to answer each question. Practice source: <a href="https://biginnovationgroup.ucdavis.edu/blog/effects-caffeine-consumption-college-students" target="_blank">The Effects of Caffeine Consumption Among College Students | BioInnovation Group at UC Davis</a></div>
+    <div class="teach-card">
+      <div class="teach-header">
+        <div class="letter-badge" style="background:var(--d-color)">D</div>
+        <div class="teach-title-group">
+          <h2 style="color:var(--d-color)">Documentation</h2>
+          <div class="stands-for">Is the information supported by quality evidence?</div>
+        </div>
+      </div>
+      <div class="teach-body">
+        <div class="article-image-wrap">
+          <img src="documentation.png" alt="Sources list at the bottom of the caffeine article">
+          <div class="img-caption">Practice source: This article includes a sources list with links to government sites and academic databases. A sign of good documentation.</div>
+        </div>
+        <p class="ask-yourself" style="margin-top:20px;">When checking documentation, ask yourself:</p>
+        <div class="checklist-item">
+          <div class="checklist-question">How in-depth is the information you have found?</div>
+          <input type="text" class="text-input" id="d_q1" maxlength="25" placeholder="Your answer (max 25 chars)">
+          <div class="char-hint">Maximum 25 characters</div>
+          <div class="field-error" id="err-d_q1">Please enter an answer.</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-question">Is the information supported by quality evidence?</div>
+          <div class="radio-group">
+            <label><input type="radio" name="d_q2" value="yes"> Yes</label>
+            <label><input type="radio" name="d_q2" value="no"> No</label>
+          </div>
+          <div class="field-error" id="err-d_q2">Please select Yes or No.</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-question">Note if and how the author documents or cites their sources.</div>
+          <input type="text" class="text-input" id="d_q3" maxlength="25" placeholder="Your answer (max 25 chars)">
+          <div class="char-hint">Maximum 25 characters</div>
+          <div class="field-error" id="err-d_q3">Please enter an answer.</div>
+        </div>
+        <div class="tip-box" style="border-color:var(--d-color); margin-top:20px;">
+          <strong>Citation Chains:</strong> A well-documented source gives you a built-in reading list. You can follow an author&#39;s citations to find additional credible sources on your topic.
+        </div>
+      </div>
+    </div>
+    <div class="quiz-card">
+      <div class="quiz-header">
+        <span class="quiz-label">Knowledge Check</span>
+        <span class="quiz-sub">&nbsp; D: Documentation</span>
+      </div>
+      <div class="quiz-body">
+        <div class="article-image-wrap" style="margin-bottom:20px;">
+          <img src="documentation.png" alt="Sources list at the bottom of the caffeine article">
+          <div class="img-caption">Practice source: This article includes a sources list with links to government sites and academic databases.</div>
+        </div>
+        <p class="question-text">What evidence shows that the author researched the topic and supported their claims with sources?</p>
+        <div class="options" id="opts-3">
+          <button class="option-btn" onclick="checkAnswer(3,0,false)"><span class="option-letter">A</span><span>The article has a large title and a featured image.</span></button>
+          <button class="option-btn" onclick="checkAnswer(3,1,true)"><span class="option-letter">B</span><span>The article includes links to sources such as the FDA and research studies.</span></button>
+          <button class="option-btn" onclick="checkAnswer(3,2,false)"><span class="option-letter">C</span><span>The author shares personal opinions about caffeine throughout the article.</span></button>
+          <button class="option-btn" onclick="checkAnswer(3,3,false)"><span class="option-letter">D</span><span>Documentation only matters for scientific papers, not web articles.</span></button>
+        </div>
+        <div class="feedback" id="fb-3"></div>
+        <div class="validation-msg" id="val-3">Please complete all questions in the lesson above before moving on.</div>
+        <div class="nav-row">
+          <button class="btn-back" onclick="goBack(2)">&#8592; Back</button>
+          <button class="btn-next" id="next-3" onclick="tryNext(3, 4)">Next: Information Type &#8594;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- I: INFORMATION TYPE -->
+  <div class="section" id="section-4">
+    <div class="instructions-bar">Instructions: Review the article images below and apply the CARDIO method to answer each question. Practice source: <a href="https://biginnovationgroup.ucdavis.edu/blog/effects-caffeine-consumption-college-students" target="_blank">The Effects of Caffeine Consumption Among College Students | BioInnovation Group at UC Davis</a></div>
+    <div class="teach-card">
+      <div class="teach-header">
+        <div class="letter-badge" style="background:var(--i-color)">I</div>
+        <div class="teach-title-group">
+          <h2 style="color:var(--i-color)">Information Type</h2>
+          <div class="stands-for">What kind of source is this, and is it appropriate?</div>
+        </div>
+      </div>
+      <div class="teach-body">
+        <div class="article-image-wrap">
+          <img src="informationtype.png" alt="UC Davis BioInnovation Group website showing the Blog navigation menu">
+          <div class="img-caption">Practice source: The navigation menu reveals this article is published under a "Blog" section. An important clue about the information type.</div>
+        </div>
+        <p class="ask-yourself" style="margin-top:20px;">When checking information type, ask yourself:</p>
+        <div class="checklist-item">
+          <div class="checklist-question">What type of information is it (e.g., news article, journal article, book)?</div>
+          <input type="text" class="text-input" id="i_q1" maxlength="25" placeholder="Your answer (max 25 chars)">
+          <div class="char-hint">Maximum 25 characters</div>
+          <div class="field-error" id="err-i_q1">Please enter an answer.</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-question">Should you use this type of source in your assignment?</div>
+          <div class="radio-group">
+            <label><input type="radio" name="i_q2" value="yes"> Yes</label>
+            <label><input type="radio" name="i_q2" value="no"> No</label>
+          </div>
+          <div class="field-error" id="err-i_q2">Please select Yes or No.</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-question">Is this type of source appropriate to use as evidence for this assignment?</div>
+          <div class="radio-group">
+            <label><input type="radio" name="i_q3" value="yes"> Yes</label>
+            <label><input type="radio" name="i_q3" value="no"> No</label>
+          </div>
+          <div class="field-error" id="err-i_q3">Please select Yes or No.</div>
+        </div>
+        <div class="tip-box" style="border-color:var(--i-color); margin-top:20px;">
+          <strong>Know Your Assignment:</strong> If your professor requires peer-reviewed or scholarly sources, a blog post, even a well-written one from a credible author, typically does not qualify. Always check your assignment instructions first.
+        </div>
+        <div class="section-image" style="margin-top:20px;">
+          <img src="The_Information_Cycle_2026.png" alt="The Information Cycle">
+          <div class="img-caption">The Information Cycle: different types of sources become available at different points after an event. Understanding this helps you evaluate a source&#39;s type and purpose.</div>
+        </div>
+      </div>
+    </div>
+    <div class="quiz-card">
+      <div class="quiz-header">
+        <span class="quiz-label">Knowledge Check</span>
+        <span class="quiz-sub">&nbsp; I: Information Type</span>
+      </div>
+      <div class="quiz-body">
+        <div class="article-image-wrap" style="margin-bottom:20px;">
+          <img src="informationtype.png" alt="UC Davis BioInnovation Group website showing the Blog navigation menu">
+          <div class="img-caption">Practice source: The navigation menu reveals this article is published under a "Blog" section.</div>
+        </div>
+        <p class="question-text">What type of source is this article, and would it be appropriate for your assignment?</p>
+        <div class="options" id="opts-4">
+          <button class="option-btn" onclick="checkAnswer(4,0,false)"><span class="option-letter">A</span><span>Since it is published on a university website, it counts as a scholarly source.</span></button>
+          <button class="option-btn" onclick="checkAnswer(4,1,false)"><span class="option-letter">B</span><span>Blog posts are always acceptable for academic papers because they are freely available online.</span></button>
+          <button class="option-btn" onclick="checkAnswer(4,2,true)"><span class="option-letter">C</span><span>It appears to be an educational blog article connected to a university organization, which may be appropriate depending on the assignment.</span></button>
+          <button class="option-btn" onclick="checkAnswer(4,3,false)"><span class="option-letter">D</span><span>Information type is only relevant when searching in library databases, not on the open web.</span></button>
+        </div>
+        <div class="feedback" id="fb-4"></div>
+        <div class="validation-msg" id="val-4">Please complete all questions in the lesson above before moving on.</div>
+        <div class="nav-row">
+          <button class="btn-back" onclick="goBack(3)">&#8592; Back</button>
+          <button class="btn-next" id="next-4" onclick="tryNext(4, 5)">Next: Objectivity &#8594;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- O: OBJECTIVITY -->
+  <div class="section" id="section-5">
+    <div class="instructions-bar">Instructions: Review the article images below and apply the CARDIO method to answer each question. Practice source: <a href="https://biginnovationgroup.ucdavis.edu/blog/effects-caffeine-consumption-college-students" target="_blank">The Effects of Caffeine Consumption Among College Students | BioInnovation Group at UC Davis</a></div>
+    <div class="teach-card">
+      <div class="teach-header">
+        <div class="letter-badge" style="background:var(--o-color)">O</div>
+        <div class="teach-title-group">
+          <h2 style="color:var(--o-color)">Objectivity</h2>
+          <div class="stands-for">Is the information fair, balanced, and free from bias?</div>
+        </div>
+      </div>
+      <div class="teach-body">
+        <div class="article-image-wrap">
+          <img src="objectivity.png" alt="Article text discussing caffeine consumption in a balanced, fact-based manner">
+          <div class="img-caption">Practice source: Read the language and tone carefully. Does the author present information factually, or does the writing lean toward persuasion or emotion?</div>
+        </div>
+        <p class="ask-yourself" style="margin-top:20px;">When checking objectivity, ask yourself:</p>
+        <div class="checklist-item">
+          <div class="checklist-question">How objective is the author?</div>
+          <input type="text" class="text-input" id="o_q1" maxlength="25" placeholder="Your answer (max 25 chars)">
+          <div class="char-hint">Maximum 25 characters</div>
+          <div class="field-error" id="err-o_q1">Please enter an answer.</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-question">Is the information fact based (supported by their documentation) or an opinion?</div>
+          <input type="text" class="text-input" id="o_q2" maxlength="25" placeholder="Your answer (max 25 chars)">
+          <div class="char-hint">Maximum 25 characters</div>
+          <div class="field-error" id="err-o_q2">Please enter an answer.</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-question">Does the source avoid emotional or biased language when discussing different viewpoints?</div>
+          <div class="radio-group">
+            <label><input type="radio" name="o_q3" value="yes"> Yes</label>
+            <label><input type="radio" name="o_q3" value="no"> No</label>
+          </div>
+          <div class="field-error" id="err-o_q3">Please select Yes or No.</div>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-question">Do the author(s) or sponsor(s) make their purpose clear (to sell, to entertain, etc.)?</div>
+          <div class="radio-group">
+            <label><input type="radio" name="o_q4" value="yes"> Yes</label>
+            <label><input type="radio" name="o_q4" value="no"> No</label>
+          </div>
+          <div class="field-error" id="err-o_q4">Please select Yes or No.</div>
+        </div>
+        <div class="tip-box" style="border-color:var(--o-color); margin-top:20px;">
+          <strong>Bias Exists Everywhere:</strong> Even reputable sources have perspectives. The key is to recognize bias rather than pretend it does not exist. Using a variety of sources with different viewpoints strengthens your research.
+        </div>
+        <div class="section-image" style="margin-top:20px;">
+          <img src="mediabias.png" alt="Media Bias infographic">
+          <div class="img-caption">Types of media bias to be aware of when evaluating sources for objectivity.</div>
+        </div>
+        <p style="margin-top:16px; font-size:16px; line-height:1.75; color:var(--text-mid);">Media bias can appear in many forms, from the way a story is framed to what information is left out entirely. Understanding the difference between reader bias, like confirmation bias, and source bias, like corporate or political bias, helps you evaluate whether a source is presenting information fairly or pushing a particular agenda.</p>
+      </div>
+    </div>
+    <div class="quiz-card">
+      <div class="quiz-header">
+        <span class="quiz-label">Knowledge Check</span>
+        <span class="quiz-sub">&nbsp; O: Objectivity</span>
+      </div>
+      <div class="quiz-body">
+        <div class="article-image-wrap" style="margin-bottom:20px;">
+          <img src="objectivity.png" alt="Article text discussing caffeine consumption">
+          <div class="img-caption">Practice source: Read the language and tone carefully. Does the author present information factually, or does the writing lean toward persuasion or emotion?</div>
+        </div>
+        <p class="question-text">Does the article appear mostly factual and balanced, or does it seem biased or opinion-based? What makes you think that?</p>
+        <div class="options" id="opts-5">
+          <button class="option-btn" onclick="checkAnswer(5,0,false)"><span class="option-letter">A</span><span>The article is completely unbiased because all articles online are neutral.</span></button>
+          <button class="option-btn" onclick="checkAnswer(5,1,false)"><span class="option-letter">B</span><span>The article is mainly opinion-based because it mentions that students drink caffeine.</span></button>
+          <button class="option-btn" onclick="checkAnswer(5,2,false)"><span class="option-letter">C</span><span>The article is biased because it includes colors and graphics on the webpage.</span></button>
+          <button class="option-btn" onclick="checkAnswer(5,3,true)"><span class="option-letter">D</span><span>The article appears mostly factual because it includes research, statistics, and sources instead of emotional language.</span></button>
+        </div>
+        <div class="feedback" id="fb-5"></div>
+        <div class="validation-msg" id="val-5">Please complete all questions in the lesson above before moving on.</div>
+        <div class="nav-row">
+          <button class="btn-back" onclick="goBack(4)">&#8592; Back</button>
+          <button class="btn-next" id="next-5" onclick="tryNext(5, 'done')">Finish Tutorial &#8594;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPLETION -->
+  <div id="completion">
+    <div class="completion-card">
+      <svg width="100%" viewBox="0 0 680 340" role="img" style="max-width:690px;display:block;margin-inline:auto;">
+        <title>Congratulations, you completed CARDIO!</title>
+        <style>
+          .pulse1 { animation: pulse 2s ease-in-out infinite; transform-origin: 340px 75px; }
+          .pulse2 { animation: pulse 2s ease-in-out infinite 0.3s; transform-origin: 340px 75px; }
+          .pulse3 { animation: pulse 2s ease-in-out infinite 0.6s; transform-origin: 340px 75px; }
+          @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.18); opacity: 0.6; } }
+          .header-fade { animation: fadeDown 0.6s ease 0.2s both; }
+          @keyframes fadeDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+          .c1 { animation: popIn 0.45s cubic-bezier(.34,1.56,.64,1) 0.8s both; }
+          .c2 { animation: popIn 0.45s cubic-bezier(.34,1.56,.64,1) 1.2s both; }
+          .c3 { animation: popIn 0.45s cubic-bezier(.34,1.56,.64,1) 1.6s both; }
+          .c4 { animation: popIn 0.45s cubic-bezier(.34,1.56,.64,1) 2.0s both; }
+          .c5 { animation: popIn 0.45s cubic-bezier(.34,1.56,.64,1) 2.4s both; }
+          .c6 { animation: popIn 0.45s cubic-bezier(.34,1.56,.64,1) 2.8s both; }
+          @keyframes popIn { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: scale(1); } }
+          .footer-fade { animation: fadeUp2 0.6s ease 3.2s both; }
+          @keyframes fadeUp2 { from { opacity: 0; transform: translateY(8px); } to { opacity: 0.45; transform: translateY(0); } }
+        </style>
+        <rect x="0" y="0" width="680" height="340" rx="16" fill="#ffffff"/>
+        <rect x="0" y="0" width="680" height="8" fill="#003478"/>
+        <rect x="0" y="332" width="680" height="8" fill="#C8931B"/>
+        <rect x="40" y="38" width="600" height="2" rx="1" fill="#C8931B" opacity="0.35"/>
+        <rect x="40" y="300" width="600" height="2" rx="1" fill="#003478" opacity="0.2"/>
+        <circle class="pulse1" cx="340" cy="75" r="32" fill="#FDF3E0"/>
+        <circle class="pulse2" cx="340" cy="75" r="22" fill="#F5E0B0"/>
+        <circle class="pulse3" cx="340" cy="75" r="12" fill="#C8931B" opacity="0.7"/>
+        <g class="header-fade">
+          <text x="340" y="128" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#003478">Congratulations!</text>
+          <text x="340" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="12.5" fill="#555">You have completed the CARDIO source evaluation tutorial.</text>
+          <line x1="160" y1="170" x2="520" y2="170" stroke="#C8931B" stroke-width="1" opacity="0.4"/>
+        </g>
+        <g class="c1" style="transform-origin:90px 225px;"><circle cx="90" cy="225" r="36" fill="#003478"/><text x="90" y="235" text-anchor="middle" font-family="Arial" font-size="30" font-weight="800" fill="#fff">C</text><text x="90" y="279" text-anchor="middle" font-family="Arial" font-size="10" fill="#003478" font-weight="600">Currency</text></g>
+        <g class="c2" style="transform-origin:190px 225px;"><circle cx="190" cy="225" r="36" fill="#C8931B"/><text x="190" y="235" text-anchor="middle" font-family="Arial" font-size="30" font-weight="800" fill="#fff">A</text><text x="190" y="279" text-anchor="middle" font-family="Arial" font-size="10" fill="#C8931B" font-weight="600">Authority</text></g>
+        <g class="c3" style="transform-origin:290px 225px;"><circle cx="290" cy="225" r="36" fill="#003478"/><text x="290" y="235" text-anchor="middle" font-family="Arial" font-size="30" font-weight="800" fill="#fff">R</text><text x="290" y="279" text-anchor="middle" font-family="Arial" font-size="10" fill="#003478" font-weight="600">Relevance</text></g>
+        <g class="c4" style="transform-origin:390px 225px;"><circle cx="390" cy="225" r="36" fill="#C8931B"/><text x="390" y="235" text-anchor="middle" font-family="Arial" font-size="30" font-weight="800" fill="#fff">D</text><text x="390" y="279" text-anchor="middle" font-family="Arial" font-size="10" fill="#C8931B" font-weight="600">Documentation</text></g>
+        <g class="c5" style="transform-origin:490px 225px;"><circle cx="490" cy="225" r="36" fill="#003478"/><text x="490" y="235" text-anchor="middle" font-family="Arial" font-size="30" font-weight="800" fill="#fff">I</text><text x="490" y="279" text-anchor="middle" font-family="Arial" font-size="10" fill="#003478" font-weight="600">Info Type</text></g>
+        <g class="c6" style="transform-origin:590px 225px;"><circle cx="590" cy="225" r="36" fill="#C8931B"/><text x="590" y="235" text-anchor="middle" font-family="Arial" font-size="30" font-weight="800" fill="#fff">O</text><text x="590" y="279" text-anchor="middle" font-family="Arial" font-size="10" fill="#C8931B" font-weight="600">Objectivity</text></g>
+        <text class="footer-fade" x="340" y="312" text-anchor="middle" font-family="Arial" font-size="10" fill="#003478" letter-spacing="2">NSU ALVIN SHERMAN LIBRARY</text>
+      </svg>
+      <h2 style="margin-top:24px;">Well done, you completed CARDIO!</h2>
+      <p>You have worked through all six criteria of the CARDIO evaluation method. Use these questions every time you find a source for an assignment to determine whether it is credible, appropriate, and useful for your research.</p>
+      <div class="cardio-recap">
+        <span class="recap-chip" style="background:var(--c-color)">C &middot; Currency</span>
+        <span class="recap-chip" style="background:var(--a-color)">A &middot; Authority</span>
+        <span class="recap-chip" style="background:var(--r-color)">R &middot; Relevance</span>
+        <span class="recap-chip" style="background:var(--d-color)">D &middot; Documentation</span>
+        <span class="recap-chip" style="background:var(--i-color)">I &middot; Information Type</span>
+        <span class="recap-chip" style="background:var(--o-color)">O &middot; Objectivity</span>
+      </div>
+      <p style="font-size:14px;color:var(--text-light);margin-bottom:0;">Need to review? Use the button below to start over at any time.</p>
+      <div style="margin-top:24px;">
+        <button class="btn-start" onclick="location.reload()">Start Over</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  const answered = [false,false,false,false,false,false];
+
+  // Field definitions per section: {id, type: 'radio'|'text', name (for radio)}
+  const sectionFields = {
+    0: [ {type:'radio', name:'c_q1', errId:'err-c_q1'}, {type:'text', id:'c_q2', errId:'err-c_q2'} ],
+    1: [ {type:'radio', name:'a_q1', errId:'err-a_q1'}, {type:'text', id:'a_q2', errId:'err-a_q2'}, {type:'text', id:'a_q3', errId:'err-a_q3'}, {type:'radio', name:'a_q4', errId:'err-a_q4'} ],
+    2: [ {type:'radio', name:'r_q1', errId:'err-r_q1'}, {type:'radio', name:'r_q2', errId:'err-r_q2'}, {type:'text', id:'r_q3', errId:'err-r_q3'} ],
+    3: [ {type:'text', id:'d_q1', errId:'err-d_q1'}, {type:'radio', name:'d_q2', errId:'err-d_q2'}, {type:'text', id:'d_q3', errId:'err-d_q3'} ],
+    4: [ {type:'text', id:'i_q1', errId:'err-i_q1'}, {type:'radio', name:'i_q2', errId:'err-i_q2'}, {type:'radio', name:'i_q3', errId:'err-i_q3'} ],
+    5: [ {type:'text', id:'o_q1', errId:'err-o_q1'}, {type:'text', id:'o_q2', errId:'err-o_q2'}, {type:'radio', name:'o_q3', errId:'err-o_q3'}, {type:'radio', name:'o_q4', errId:'err-o_q4'} ]
+  };
+
+  function validateSection(sectionIdx) {
+    const fields = sectionFields[sectionIdx];
+    let allValid = true;
+    fields.forEach(field => {
+      const errEl = document.getElementById(field.errId);
+      let valid = false;
+      if (field.type === 'radio') {
+        valid = document.querySelector(`input[name="${field.name}"]:checked`) !== null;
+      } else {
+        const el = document.getElementById(field.id);
+        valid = el && el.value.trim().length > 0;
+      }
+      if (!valid) {
+        allValid = false;
+        if (errEl) errEl.classList.add('show');
+      } else {
+        if (errEl) errEl.classList.remove('show');
+      }
+    });
+    return allValid;
+  }
+
+  const correctFeedback = {
+    0: "That is correct! The article was published in May 2025, which makes it a recent source. For a topic like caffeine and college students, having current information helps ensure the data and recommendations you are reading reflect what researchers know today.",
+    1: "That is correct! The article is connected to the BioInnovation Group at UC Davis, a recognized research university, and it includes an author name and a list of sources. These are positive signs of authority, though you should still read laterally to learn more about the author and organization.",
+    2: "That is correct! The article directly discusses caffeine habits and their effects on college students, which makes it relevant to a research topic about student health or caffeine use. Always ask yourself whether the source connects to your specific research question.",
+    3: "That is correct! The article links to credible sources including the FDA and published research studies. This shows the author backed up their claims with evidence, which is exactly what good documentation looks like.",
+    4: "That is correct! This is an educational blog article published by a university student organization. Depending on your assignment, it may or may not be appropriate. Always check whether your professor requires peer-reviewed sources before using a blog, even one connected to a university.",
+    5: "That is correct! The article uses research, statistics, and cited sources rather than emotional or persuasive language, which are signs of a more factual and balanced source. Keep in mind that even fact-based sources can have a perspective, so it is always good to compare multiple sources."
+  };
+
+  function checkAnswer(sectionIdx, optIdx, isCorrect) {
+    if (answered[sectionIdx]) return;
+    const opts = document.querySelectorAll(`#opts-${sectionIdx} .option-btn`);
+    const fb = document.getElementById(`fb-${sectionIdx}`);
+    if (!isCorrect) {
+      opts[optIdx].classList.add("wrong");
+      opts[optIdx].disabled = true;
+      fb.innerHTML = "<strong>Not quite.</strong> Review the lesson above and try a different answer.";
+      fb.className = "feedback show wrong-fb";
+      return;
+    }
+    answered[sectionIdx] = true;
+    opts[optIdx].classList.add("correct");
+    opts.forEach(btn => { btn.disabled = true; });
+    fb.innerHTML = `<strong>Correct!</strong> ${correctFeedback[sectionIdx]}`;
+    fb.className = "feedback show correct-fb";
+    document.getElementById(`next-${sectionIdx}`).classList.add("show");
+    document.getElementById(`pill-${sectionIdx}`).classList.add("done");
+    updateProgress(sectionIdx + 1);
+  }
+
+  function tryNext(sectionIdx, nextTarget) {
+    const reflectOk = validateSection(sectionIdx);
+    const mcOk = answered[sectionIdx];
+    const valMsg = document.getElementById(`val-${sectionIdx}`);
+    if (!reflectOk || !mcOk) {
+      valMsg.textContent = !mcOk && reflectOk
+        ? "Please answer the knowledge check question correctly before moving on."
+        : "Please complete all questions in the lesson above and answer the knowledge check question correctly before moving on.";
+      valMsg.classList.add("show");
+      return;
+    }
+    valMsg.classList.remove("show");
+    if (nextTarget === "done") { showCompletion(); return; }
+    nextSection(nextTarget);
+  }
+
+  function goToIntro2() {
+    document.getElementById("section-intro").style.display = "none";
+    document.getElementById("section-intro2").style.display = "block";
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function goBackToIntro1() {
+    document.getElementById("section-intro2").style.display = "none";
+    document.getElementById("section-intro").style.display = "block";
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function startTutorial() {
+    document.getElementById("section-intro2").style.display = "none";
+    document.getElementById("section-0").classList.add("active");
+    document.getElementById("pill-0").classList.add("active");
+    document.getElementById("progressLabel").textContent = "Step 1 of 6";
+    updateProgress(0);
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function nextSection(idx) {
+    document.querySelector(".section.active").classList.remove("active");
+    document.getElementById(`section-${idx}`).classList.add("active");
+    document.getElementById(`pill-${idx}`).classList.add("active");
+    document.getElementById("progressLabel").textContent = `Step ${idx+1} of 6`;
+    updateProgress(idx);
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function goBack(target) {
+    const current = document.querySelector(".section.active");
+    if (current) current.classList.remove("active");
+    if (target === "intro") {
+      document.getElementById("section-intro").style.display = "block";
+      document.getElementById("progressLabel").textContent = "Introduction";
+      document.getElementById("progressBar").style.width = "0%";
+      for (let i = 0; i < 6; i++) document.getElementById(`pill-${i}`).classList.remove("active");
+    } else if (target === "intro2") {
+      document.getElementById("section-intro2").style.display = "block";
+      document.getElementById("progressLabel").textContent = "Introduction";
+      document.getElementById("progressBar").style.width = "0%";
+      for (let i = 0; i < 6; i++) document.getElementById(`pill-${i}`).classList.remove("active");
+    } else {
+      document.getElementById(`section-${target}`).classList.add("active");
+      document.getElementById(`pill-${target}`).classList.add("active");
+      document.getElementById("progressLabel").textContent = `Step ${target+1} of 6`;
+      updateProgress(target);
+    }
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function updateProgress(step) {
+    document.getElementById("progressBar").style.width = (step / 6 * 100) + "%";
+  }
+  function showCompletion() {
+    document.querySelector(".section.active").classList.remove("active");
+    document.getElementById("completion").classList.add("show");
+    document.getElementById("progressBar").style.width = "100%";
+    document.getElementById("progressLabel").textContent = "Completed";
+    for (let i = 0; i < 6; i++) {
+      document.getElementById(`pill-${i}`).classList.add("done");
+      document.getElementById(`pill-${i}`).classList.remove("active");
+    }
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+</script>
+</body>
+</html>
