@@ -231,6 +231,7 @@
           <p class="img-caption">The CARDIO evaluation framework. Use these six questions every time you evaluate a source.</p>
         </div>
         <hr class="section-divider">
+        <h2>Lateral Reading</h2>
         <p>One of the most important skills in evaluating sources is <strong>lateral reading</strong>. Instead of reading deeply into a single source to decide if it is trustworthy, you open new browser tabs and search for what others say about the author or organization. Professional fact-checkers use this technique because it is faster and more reliable than trying to evaluate a source on its own. Watch the short video below to see lateral reading in action.</p>
         <div class="video-wrap" style="margin-top:16px;">
           <iframe src="https://www.youtube.com/embed/SHNprb2hgzU" title="Lateral Reading video" allowfullscreen></iframe>
@@ -240,10 +241,26 @@
     </div>
     <div style="display:flex; justify-content:space-between; margin-top:8px;">
       <button class="btn-back" onclick="goBackToIntro1()">&#8592; Back</button>
-      <button class="btn-start" onclick="startTutorial()">Begin Tutorial &rarr;</button>
+      <button class="btn-start" onclick="goToIntro3()">Begin Tutorial &rarr;</button>
     </div>
   </div>
 
+<!-- INTRO PAGE 3 -->
+  <div id="section-intro3" style="display:none;">
+    <div class="intro-card">
+      <div class="intro-card-body">
+        <h2>Before You Start</h2>
+        <p style="font-size:19px; line-height:1.9;">When you finish this tutorial, you will find a link on the completion page to the <strong><em>COMP 1500 quiz.</em></strong></p>
+        <p style="font-size:19px; line-height:1.9;">This quiz is <strong style="color:var(--error); font-size:22px; letter-spacing:0.02em;">REQUIRED</strong> for this class. Do not skip it.</p>
+        <p style="font-size:19px; line-height:1.9;">Work through the tutorial, complete the quiz, and you are done. You got this.</p>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:space-between; margin-top:8px;">
+      <button class="btn-back" onclick="goBackToIntro2()">&#8592; Back</button>
+      <button class="btn-start" onclick="startTutorial()">Begin Tutorial &rarr;</button>
+    </div>
+  </div>
+  
   <!-- C: CURRENCY -->
   <div class="section" id="section-0">
     <div class="instructions-bar">Instructions: Review the article images below and apply the CARDIO method to answer each question. Practice source: <a href="https://biginnovationgroup.ucdavis.edu/blog/effects-caffeine-consumption-college-students" target="_blank">The Effects of Caffeine Consumption Among College Students | BioInnovation Group at UC Davis</a></div>
@@ -748,6 +765,8 @@
         <span class="recap-chip" style="background:var(--i-color)">I &middot; Information Type</span>
         <span class="recap-chip" style="background:var(--o-color)">O &middot; Objectivity</span>
       </div>
+      <p style="font-size:17px; font-weight:600; color:var(--text-dark); margin-bottom:8px;">Ready for the next step? Take the <strong style="color:var(--error);">REQUIRED</strong> COMP 1500 quiz now:</p>
+      <a href="https://nova.libwizard.com/f/online-COMP1500-fall2026" target="_blank" style="display:inline-block; background:var(--nsu-gold); color:white; font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:15px; padding:14px 32px; border-radius:10px; text-decoration:none; margin-bottom:32px;">Take the COMP 1500 Quiz &rarr;</a>
       <p style="font-size:14px;color:var(--text-light);margin-bottom:0;">Need to review? Use the button below to start over at any time.</p>
       <div style="margin-top:24px;">
         <button class="btn-start" onclick="location.reload()">Start Over</button>
@@ -846,6 +865,16 @@
   function goBackToIntro1() {
     document.getElementById("section-intro2").style.display = "none";
     document.getElementById("section-intro").style.display = "block";
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function goToIntro3() {
+    document.getElementById("section-intro2").style.display = "none";
+    document.getElementById("section-intro3").style.display = "block";
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  function goBackToIntro2() {
+    document.getElementById("section-intro3").style.display = "none";
+    document.getElementById("section-intro2").style.display = "block";
     window.scrollTo({top:0,behavior:"smooth"});
   }
   function startTutorial() {
