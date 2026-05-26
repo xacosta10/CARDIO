@@ -250,9 +250,9 @@
     <div class="intro-card">
       <div class="intro-card-body">
         <h2>Before You Start</h2>
-        <p style="font-size:19px; line-height:1.9;">When you finish this tutorial, you will find a link on the completion page to the <strong><em>COMP 1500 quiz.</em></strong></p>
+        <p style="font-size:19px; line-height:1.9;">When you <u>finish</u> this tutorial, <strong>you will find a link on the completion page to the <em>COMP 1500 quiz.</em></strong></p>
         <p style="font-size:19px; line-height:1.9;">This quiz is <strong style="color:var(--error); font-size:22px; letter-spacing:0.02em;">REQUIRED</strong> for this class. Do not skip it.</p>
-        <p style="font-size:19px; line-height:1.9;">Work through the tutorial, complete the quiz, and you are done. You got this.</p>
+        <p style="font-size:19px; line-height:1.9;">Work through the tutorial, complete the quiz, and you are done. <strong>The questions in this tutorial are not the quiz</strong> You got this.</p>
       </div>
     </div>
     <div style="display:flex; justify-content:space-between; margin-top:8px;">
@@ -878,7 +878,7 @@
     window.scrollTo({top:0,behavior:"smooth"});
   }
   function startTutorial() {
-    document.getElementById("section-intro2").style.display = "none";
+    document.getElementById("section-intro3").style.display = "none";
     document.getElementById("section-0").classList.add("active");
     document.getElementById("pill-0").classList.add("active");
     document.getElementById("progressLabel").textContent = "Step 1 of 6";
